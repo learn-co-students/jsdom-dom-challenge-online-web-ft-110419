@@ -55,10 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
         like()
     });
 
-// As a user, I can pause the counter, which should
 // WORKS, BUT ONLY ONCE - pause the counter
 // WORKS - the pause button should then show the text "resume."
-
     document.getElementById("pause").addEventListener("click", () => {
         const pause = document.getElementById("pause").innerText;
 
