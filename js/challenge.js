@@ -1,26 +1,115 @@
- // WORKS: sets counter incrementing every second after page is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    function increment(){
+
+    let counter = 0;
+
+    // WORKS: As a user, I should see the timer increment every second once the page has loaded.
+    function autoIncrement(){
         counter++;
         document.getElementById("counter").innerText = counter;
     }
 
-    let counter = 0;
-    let interval = setInterval(increment, 1000);
+    let interval = setInterval(autoIncrement, 1000);
+
+    // WORKS: Manually Decrement
+    document.getElementById("minus").addEventListener("click", () => {
+        let counter = document.getElementById("counter").innerText;
+        function manualDecrement() {
+            counter--;
+        };
+
+        function pause() {
+            clearInterval(interval);
+        };
+
+        manualDecrement(counter);
+        document.getElementById("counter").innerText = counter;
+        pause();
+    });
+
+    // WORKS: Manually Increment
+    document.getElementById("plus").addEventListener("click", () => {
+        let counter = document.getElementById("counter").innerText;
+        function manualIncrement() {
+            counter++;
+        };
+
+        manualIncrement(counter);
+        document.getElementById("counter").innerText = counter;
+    });
+
+// WORKS: As a user, I can 'like' an individual number of the counter. 
+    document.getElementById("heart").addEventListener("click", () => {
+        let counter = document.getElementById("counter").innerText;
+        function like() {
+            let ul = document.querySelector("ul");
+            let li = document.createElement('li');
+            let n = "1"
+
+            // NOT YET: I should see count of the number of 'likes' associated with that number.
+                // add conditional:
+                // if counter number is already in li.innerHTML, then increment n by 1
+
+            li.innerHTML = `${counter} has been liked ${n} times`;
+            ul.appendChild(li);
+        };
+        like()
+    });
+
+// As a user, I can pause the counter, which should
+// WORKS, BUT ONLY ONCE - pause the counter
+// WORKS - the pause button should then show the text "resume."
+
+    document.getElementById("pause").addEventListener("click", () => {
+        const pause = document.getElementById("pause").innerText;
+
+        switch (pause) {
+            case "pause":
+                function pause() {
+                    clearInterval(interval);
+                    document.getElementById("pause").innerText = "resume"
+                };
+
+                // NOT YET - disable all buttons except the pause button
+                pause();
+                return
+
+// WORKS, BUT ONLY ONCE When 'resume' is clicked, it should restart the counter and re-enable the buttons.
+            case "resume":
+                let counter = document.getElementById("counter").innerText;
+                function resume() {
+                    function autoIncrement(){
+                        counter++;
+                        document.getElementById("counter").innerText = counter;
+                    }
+                
+                    let interval = setInterval(autoIncrement, 1000);
+                    document.getElementById("pause").innerHTML = "pause"
+                };
+                resume();
+                return
+        };
+    });
+// WORKS: As a user, I can leave comments on my gameplay, such as: "Wow, what a fun game this is."
+    document.getElementById("submit").addEventListener("click", () => {
+        event.preventDefault();
+        let comment = document.getElementById("comment-input").value
+
+        function createComment() {
+            let commentList = document.querySelector("div")
+            let ul = document.createElement("ul");
+            let li = document.createElement('li');
+            li.innerHTML = comment;
+            commentList.appendChild(ul);
+            ul.appendChild(li);
+            document.getElementById("comment-input").value = ""
+        };
+        createComment()
+    });
 });
 
 
-    
 
 
 
-// DOESN"T WORK: Pause counter when pause button is clicked
-// currently causes HTML Header object to flash
-// document.getElementById("pause").addEventListener("click", () => {
-//     function pause() {
-//         clearInterval(increment);
-//     }
-//   pause;
-//   document.getElementById("counter").innerText = counter;
-// });
+
 
