@@ -43,14 +43,34 @@ document.addEventListener("DOMContentLoaded", () => {
         function like() {
             let ul = document.querySelector("ul");
             let li = document.createElement('li');
-            let n = "1"
+            let n = 1
+
+            let liList = document.querySelector("ul").querySelectorAll("li")
+            // iterate through liList and check if each item starts with counter number
+            // if not,  
+            //  li.innerHTML = `${counter} has been liked ${n} times`;
+                // ul.appendChild(li);
+            // if yes, then
+                // split string and set n to 5th element
+                //  li.innerHTML = `${counter} has been liked ${n} times`;
+
+
+
+            // if (liList.includes(counter)) {
+            //     li = 
+                li.innerHTML = `${counter} has been liked ${n} times`;
+                ul.appendChild(li);
+            // } else () {
+
+            // }
+
 
             // NOT YET: I should see count of the number of 'likes' associated with that number.
                 // add conditional:
                 // if counter number is already in li.innerHTML, then increment n by 1
 
-            li.innerHTML = `${counter} has been liked ${n} times`;
-            ul.appendChild(li);
+            // li.innerHTML = `${counter} has been liked ${n} times`;
+            // ul.appendChild(li);
         };
         like()
     });
