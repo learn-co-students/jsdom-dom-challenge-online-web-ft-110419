@@ -40,12 +40,41 @@ document.addEventListener("DOMContentLoaded", () => {
 // WORKS: As a user, I can 'like' an individual number of the counter. 
     document.getElementById("heart").addEventListener("click", () => {
         let counter = document.getElementById("counter").innerText;
-        function like() {
-            let ul = document.querySelector("ul");
-            let li = document.createElement('li');
-            let n = 1
+        let liList = document.querySelector("ul").querySelectorAll("li")
+        let ul = document.querySelector("ul");
+        let li = document.createElement('li');
+        let n = 1
 
-            let liList = document.querySelector("ul").querySelectorAll("li")
+        function like() {
+            // this section works once
+            if (liList.length === 0 ) {
+                li.innerHTML = `${counter} has been liked ${n} times`;
+                ul.appendChild(li);
+                return
+            } 
+            if (liList > 0) {
+                for (let i = 0; i < liList.length; i++) {
+                    let item = liList[i];
+                    let num = item.split(" ")[0]
+                    let times = item.split(" ")[4]
+    
+                    if (num != counter) {
+    
+                    } else if (num == counter) {
+                        item = `${counter} has been liked ${times++} times`;
+                        li.innerHTML = item
+                    } 
+                  }
+                }
+        };
+
+       
+
+      
+
+
+            like()
+        });
             // iterate through liList and check if each item starts with counter number
             // if not,  
             //  li.innerHTML = `${counter} has been liked ${n} times`;
@@ -56,14 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-            // if (liList.includes(counter)) {
-            //     li = 
-                li.innerHTML = `${counter} has been liked ${n} times`;
-                ul.appendChild(li);
-            // } else () {
-
-            // }
-
 
             // NOT YET: I should see count of the number of 'likes' associated with that number.
                 // add conditional:
@@ -71,9 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // li.innerHTML = `${counter} has been liked ${n} times`;
             // ul.appendChild(li);
-        };
-        like()
-    });
+       
+
 
 // WORKS, BUT ONLY ONCE - pause the counter
 // WORKS - the pause button should then show the text "resume."
