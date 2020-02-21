@@ -80,7 +80,7 @@ document.getElementById("pause").addEventListener("click", () => {
     let counter = document.getElementById("counter").innerText;
 
     function pause() {
-        clearInterval(interval);
+        interval = clearInterval(interval);
         document.getElementById("pause").innerText = "resume"
     };
 
@@ -90,7 +90,7 @@ document.getElementById("pause").addEventListener("click", () => {
             document.getElementById("counter").innerText = counter;
         }
     
-        let interval = setInterval(autoIncrement, 1000);
+        interval = setInterval(autoIncrement, 1000);
         document.getElementById("pause").innerHTML = "pause"
     };
 
