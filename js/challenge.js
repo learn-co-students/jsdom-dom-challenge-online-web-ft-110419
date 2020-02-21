@@ -1,5 +1,3 @@
-// STILL NOT WORKING - unable to pause/resume a second time
-
 let counter = 0;
 
 function autoIncrement(){
@@ -74,7 +72,6 @@ document.getElementById("heart").addEventListener("click", () => {
 
 
 // WORKS - pause and resume the counter
-// NOT YET - can only pause and resume once!
 document.getElementById("pause").addEventListener("click", () => {
     let button = document.getElementById("pause").innerText;
     let counter = document.getElementById("counter").innerText;
