@@ -1,5 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+// STILL NOT WORKING - unable to pause/resume a second time
 
+document.addEventListener("DOMContentLoaded", () => {
     let counter = 0;
 
     // WORKS: As a user, I should see the timer increment every second once the page has loaded.
@@ -12,34 +13,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // WORKS: Manually Decrement
     document.getElementById("minus").addEventListener("click", () => {
-        let counter = document.getElementById("counter").innerText;
         function manualDecrement() {
-            counter--;
+            --counter;
         };
 
-        function pause() {
-            clearInterval(interval);
-        };
-
-        manualDecrement(counter);
+        manualDecrement(document.getElementById("counter").innerText);
         document.getElementById("counter").innerText = counter;
-        pause();
     });
 
     // WORKS: Manually Increment
     document.getElementById("plus").addEventListener("click", () => {
-        let counter = document.getElementById("counter").innerText;
+
         function manualIncrement() {
-            counter++;
+            ++counter;
         };
 
-        function pause() {
-            clearInterval(interval);
-        };
-
-        manualIncrement(counter);
+        manualIncrement(document.getElementById("counter").innerText);
         document.getElementById("counter").innerText = counter;
-        pause();
     });
 
     // WORKS: As a user, I can 'like' an individual number of the counter. 
@@ -80,8 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-// WORKS, BUT ONLY ONCE - pause the counter
-// WORKS - the pause button should then show the text "resume."
+// WORKS - pause and resume the counter
+// NOT YET - can only pause and resume once!
     document.getElementById("pause").addEventListener("click", () => {
         let button = document.getElementById("pause").innerText;
         let counter = document.getElementById("counter").innerText;
@@ -102,15 +92,20 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         if (button === "pause") {
-                // NOT YET - disable all buttons except the pause button
                 pause();
+                document.getElementById("minus").disabled = true
+                document.getElementById("plus").disabled = true
+                document.getElementById("heart").disabled = true
+
         } else if (button === "resume") {
-                // WORKS, BUT ONLY ONCE When 'resume' is clicked, it should restart the counter and re-enable the buttons.
                 resume();
+                document.getElementById("minus").disabled = false
+                document.getElementById("plus").disabled = false
+                document.getElementById("heart").disabled = false
         };
     });
 
-// WORKS: As a user, I can leave comments on my gameplay, such as: "Wow, what a fun game this is."
+// WORKS: As a user, I can leave comments
     document.getElementById("submit").addEventListener("click", () => {
         event.preventDefault();
         let comment = document.getElementById("comment-input").value
