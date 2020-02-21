@@ -33,11 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
             counter++;
         };
 
+        function pause() {
+            clearInterval(interval);
+        };
+
         manualIncrement(counter);
         document.getElementById("counter").innerText = counter;
+        pause();
     });
 
-// WORKS: As a user, I can 'like' an individual number of the counter. 
+    // WORKS: As a user, I can 'like' an individual number of the counter. 
     document.getElementById("heart").addEventListener("click", () => {
         let counter = document.getElementById("counter").innerText;
         let liList = document.querySelector("ul").querySelectorAll("li")
@@ -46,53 +51,33 @@ document.addEventListener("DOMContentLoaded", () => {
         let n = 1
 
         function like() {
-            // this section works once
             if (liList.length === 0 ) {
                 li.innerHTML = `${counter} has been liked ${n} times`;
                 ul.appendChild(li);
-                return
-            } 
-            if (liList > 0) {
-                for (let i = 0; i < liList.length; i++) {
-                    let item = liList[i];
-                    let num = item.split(" ")[0]
-                    let times = item.split(" ")[4]
-    
-                    if (num != counter) {
-    
-                    } else if (num == counter) {
-                        item = `${counter} has been liked ${times++} times`;
-                        li.innerHTML = item
-                    } 
-                  }
-                }
+            } else if (liList.length > 0) {
+                commentText(liList)
+            }
         };
 
-       
+        function commentText() {
+            for (let i = 0; i < liList.length; i++) {
+                let item = liList[i];
+                let num = item.innerText.split(" ")[0]
+                let times = item.innerText.split(" ")[4]
 
-      
+                if (num === counter) {
+                    document.querySelector("ul").removeChild(item)
+                    li.innerText = `${counter} has been liked ${++times} times`;
+                    ul.appendChild(li);
 
-
-            like()
-        });
-            // iterate through liList and check if each item starts with counter number
-            // if not,  
-            //  li.innerHTML = `${counter} has been liked ${n} times`;
-                // ul.appendChild(li);
-            // if yes, then
-                // split string and set n to 5th element
-                //  li.innerHTML = `${counter} has been liked ${n} times`;
-
-
-
-
-            // NOT YET: I should see count of the number of 'likes' associated with that number.
-                // add conditional:
-                // if counter number is already in li.innerHTML, then increment n by 1
-
-            // li.innerHTML = `${counter} has been liked ${n} times`;
-            // ul.appendChild(li);
-       
+                } else if (num !== counter.innerText) {
+                    li.innerText = `${counter} has been liked ${n} times`;
+                    ul.appendChild(li);
+                } 
+            }
+        }
+        like()
+    });
 
 
 // WORKS, BUT ONLY ONCE - pause the counter
@@ -151,3 +136,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+
+            // iterate through liList and check if each item starts with counter number
+            // if not,  
+            //  li.innerHTML = `${counter} has been liked ${n} times`;
+                // ul.appendChild(li);
+            // if yes, then
+                // split string and set n to 5th element
+                //  li.innerHTML = `${counter} has been liked ${n} times`;
+
+
+
+
+            // NOT YET: I should see count of the number of 'likes' associated with that number.
+                // add conditional:
+                // if counter number is already in li.innerHTML, then increment n by 1
+
+            // li.innerHTML = `${counter} has been liked ${n} times`;
+            // ul.appendChild(li);
