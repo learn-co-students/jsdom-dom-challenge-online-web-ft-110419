@@ -5,7 +5,7 @@ const pause = document.getElementById("pause")
 let buttons = document.querySelectorAll('button')
 let count = counter.innerText
 var i = 1;
-
+var interval
 
 
 function increment(){
@@ -16,7 +16,7 @@ function increment(){
 document.addEventListener("DOMContentLoaded", (e)=>{
     if (e){
         // debugger
-        setInterval(function(){increment()}, 1000)
+        interval = setInterval(function(){increment()}, 1000)
      
     };
     e.preventDefault();
@@ -31,7 +31,7 @@ function disableBTNS(){
     buttons.forEach(function(btn){
       if (btn.id != "pause"){
          btn.disabled = true;
-         increment().disabled = true
+         clearInterval(interval);
       }
     });
   }
@@ -40,6 +40,7 @@ function disableBTNS(){
     buttons.forEach(function(btn){
       if (btn.disabled == true){
          btn.disabled = false;
+        //  setInterval(function(){increment()}, 1000)
       }
     })
   }
