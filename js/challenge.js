@@ -1,11 +1,23 @@
 let counterBox = document.getElementById('counter');
+let plusButton = document.getElementById('plus');
+let minusButton = document.getElementById('minus');
 
 function counter() {
-    let count = 0;
-    setInterval(function(count) {
-        return count++
-    }, 1000);
-    counterBox.innerHTML = count;
+    counterBox.innerText = parseInt(counterBox.innerText) + 1;
 }
 
-counter();
+function increaseCounter() {
+    counterBox.innerText = parseInt(counterBox.innerText) + 1;
+} 
+
+let timer = setInterval(counter, 1000);
+
+function addEventListeners() {
+   plusButton.addEventListener('click', increaseCounter)
+}
+
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    timer
+    addEventListeners()
+})
