@@ -4,7 +4,7 @@ let likes = document.querySelector('ul');
 let plusButton = document.getElementById('plus');
 let minusButton = document.getElementById('minus');
 let heartButton = document.getElementById('heart');
-
+let pauseButton = document.getElementById('pause');
 
 function increaseCounter() {
     counter.innerText = parseInt(counter.innerText) + 1;
@@ -29,21 +29,26 @@ function addLike(button) {
     button.innerText = `❤️ ${likes + 1}`
 }
 
-likes.addEventListener('click', function(evt) {
-    if (evt.target && evt.target.matches('li > button')) {
-        addLike
+function pause() {
+    if (pauseButton.innerText == "resume") {
+        pauseButton.innerText = "pause"
+        timer =     setInterval(increaseCounter, 1000);
+    } else if (pauseButton.innerText = "pause") {
+        pauseButton.innerText = "resume"   
+        clearInterval(timer)
     }
-});
+}
 
 function addEventListeners() {
    plusButton.addEventListener('click', increaseCounter);
    minusButton.addEventListener('click', decreaseCounter);
    heartButton.addEventListener('click', like);
    likes.addEventListener('click', function(evt) {
-    if (evt.target && evt.target.matches('li > button')) {
-        addLike(evt.target)
-    }
+        if (evt.target && evt.target.matches('li > button')) {
+            addLike(evt.target);
+        }
     });
+    pauseButton.addEventListener('click', pause)
 }
 
 let timer = setInterval(increaseCounter, 1000);
