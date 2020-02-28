@@ -5,6 +5,7 @@ let plusButton = document.getElementById('plus');
 let minusButton = document.getElementById('minus');
 let heartButton = document.getElementById('heart');
 let pauseButton = document.getElementById('pause');
+let commentForm = document.getElementById('comment-form');
 
 function increaseCounter() {
     counter.innerText = parseInt(counter.innerText) + 1;
@@ -39,6 +40,19 @@ function pause() {
     }
 }
 
+// Prep list for comments
+let commentDiv = document.getElementById('list')
+let comments = document.createElement('ul')
+commentDiv.appendChild(comments)
+
+function comment(event) {
+    let li = document.createElement('li')
+    li.innerText = commentForm.querySelector('#comment-input').value
+    comments.appendChild(li); // Add input to list
+    event.preventDefault()
+    commentForm.querySelector('#comment-input').value = "" // Clear input field
+}
+
 function addEventListeners() {
    plusButton.addEventListener('click', increaseCounter);
    minusButton.addEventListener('click', decreaseCounter);
@@ -49,6 +63,7 @@ function addEventListeners() {
         }
     });
     pauseButton.addEventListener('click', pause)
+    commentForm.addEventListener('submit', comment)
 }
 
 let timer = setInterval(increaseCounter, 1000);
